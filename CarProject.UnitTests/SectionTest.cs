@@ -63,5 +63,11 @@ namespace CarProject.UnitTests
 
             Assert.AreEqual(sectionTwo, sectionOne.NextSection!.NextSection);
         }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ItShouldThrowAnException_GivenInvalidParameters()
+        {
+            Section sectionOne = new Section(-10, 10);
+        }
     }
 }

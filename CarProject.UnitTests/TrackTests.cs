@@ -50,6 +50,17 @@ namespace CarProject.UnitTests
             Assert.AreEqual(30, speed);
 
         }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ItShouldThrowAnException_GivenInvalidTrackSection()
+        {
+            List<Section> sectionList = new List<Section>();
+            Section newSection = new Section(0,0);
+            sectionList.Add(newSection);
+            sectionList.Add(newSection);
+            sectionList.Add(newSection);
+            Track track = new Track(sectionList);
+        }
 
     }
 }

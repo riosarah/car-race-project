@@ -10,12 +10,16 @@ namespace CarProject.Logic
     {
         private List<Section> _trackList;
         private bool _looped = false;
-
+        #region constructors
         public Track(List<Section> trackList) : this(trackList, false)
         {
         }
         public Track(List<Section> trackList, bool looped)
         {
+            if (!SectionValuesAreValid(trackList)) 
+            {
+                throw new ArgumentException();
+            }
             this._trackList = trackList;
             LinkSections();
             _looped = looped;
@@ -23,15 +27,40 @@ namespace CarProject.Logic
         public Track((int, int)[] sectionList) : this(sectionList, false) { }
         public Track((int, int)[] sectionInfos, bool looped)
         {
-            _trackList = new List<Section>();
+            List<Section>tempTrackList = new List<Section>();
             foreach ((int x, int y) in sectionInfos)
             {
-                _trackList.Add(new Section(x, y));
+                tempTrackList.Add(new Section(x, y));
             }
+            if (!SectionValuesAreValid(tempTrackList))
+            {
+                throw new ArgumentException();
+            }
+            _trackList = tempTrackList;
             _looped = looped;
             LinkSections();
         }
 
+        private bool SectionValuesAreValid(List<Section> trackList)
+        {
+            bool valid = true;
+            if (trackList[0] != null)
+            {
+                foreach (Section a in trackList)
+                {
+                    if (a.MaxSpeed <= 0 || a.Length <= 0)
+                    {
+                        valid = false;
+                    }
+                }
+            }
+            else
+            {
+                valid = false;
+            }
+            return valid;
+        }
+        #endregion constructors
         public Section? StartSection { get => _trackList[0]; }
         public Section? LastSection
         {

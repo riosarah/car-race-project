@@ -19,6 +19,10 @@ namespace CarProject.Logic
 
         public Section(int speed, int length)
         {
+            if(speed < 0 || length < 0)
+            {
+                throw new ArgumentException();
+            }
             MaxSpeed = speed;
             Length = length;
         }
