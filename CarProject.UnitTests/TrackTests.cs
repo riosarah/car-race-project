@@ -61,6 +61,22 @@ namespace CarProject.UnitTests
             sectionList.Add(newSection);
             Track track = new Track(sectionList);
         }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ItShouldThrowException_GivenAnEmptyList()
+        {
+            List<Section> emptyList = new List<Section>();
+            Track invalidTrack = new Track(emptyList);
+        }
+        [TestMethod]
+        public void ItShouldReturnAStringWithSectionInfos_GivenATrackAndToStringIsCalled()
+        {
+            (int, int)[] sections = { (10, 10), (20, 20), (30, 30) };
+            Track track = new Track(sections);
+            string result = track.ToString();
+            string expected = "Track sections: (10,10), (20,20), (30,30).";
+            Assert.AreEqual(expected, result);
+        }
 
     }
 }

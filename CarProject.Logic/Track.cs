@@ -11,11 +11,13 @@ namespace CarProject.Logic
         private List<Section> _trackList;
         private bool _looped = false;
         #region constructors
-        public Track(List<Section> trackList) : this(trackList, false)
-        {
-        }
+        public Track(List<Section> trackList) : this(trackList, false) { }
         public Track(List<Section> trackList, bool looped)
         {
+            if (trackList.Count == 0)
+            {
+                throw new ArgumentException();
+            }
             if (!SectionValuesAreValid(trackList)) 
             {
                 throw new ArgumentException();
@@ -32,15 +34,19 @@ namespace CarProject.Logic
             {
                 tempTrackList.Add(new Section(x, y));
             }
+            if (tempTrackList.Count == 0)
+            {
+                throw new ArgumentException();
+            }
             if (!SectionValuesAreValid(tempTrackList))
             {
                 throw new ArgumentException();
             }
+            
             _trackList = tempTrackList;
             _looped = looped;
             LinkSections();
         }
-
         private bool SectionValuesAreValid(List<Section> trackList)
         {
             bool valid = true;
@@ -123,6 +129,24 @@ namespace CarProject.Logic
                     }
                 }
             }
+        }
+        public override string ToString() 
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Track sections:");
+            foreach(Section a in _trackList)
+            {
+                if(a == _trackList[_trackList.Count - 1])
+                {
+                    builder.Append($" ({a.MaxSpeed},{a.Length}).");
+                }
+                else
+                {
+
+                    builder.Append($" ({a.MaxSpeed},{a.Length}),");
+                }
+            }
+           return builder.ToString();
         }
     }
 }
