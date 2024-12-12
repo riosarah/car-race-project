@@ -50,6 +50,20 @@ namespace CarProject.Logic
             }
         }
 
+        public int Length { get 
+            {
+                int sum = 0;
+                if (_trackList[0] != null)
+                {
+                    foreach (Section i in _trackList)
+                    {
+                        sum += i.Length;
+                    }
+                }
+                return sum;
+            }
+        }
+
         public void LinkSections()
         {
             if (_trackList[0] != null)
