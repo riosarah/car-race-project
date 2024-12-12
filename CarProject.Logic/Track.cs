@@ -10,9 +10,9 @@ namespace CarProject.Logic
     {
         private List<Section> _trackList;
         private bool _looped = false;
-        
+
         public Track(List<Section> trackList) : this(trackList, false)
-        {           
+        {
         }
         public Track(List<Section> trackList, bool looped)
         {
@@ -24,9 +24,9 @@ namespace CarProject.Logic
         public Track((int, int)[] sectionInfos, bool looped)
         {
             _trackList = new List<Section>();
-            foreach((int x, int y) in sectionInfos)
+            foreach ((int x, int y) in sectionInfos)
             {
-                _trackList.Add(new Section(x,y));
+                _trackList.Add(new Section(x, y));
             }
             _looped = looped;
             LinkSections();
@@ -41,12 +41,21 @@ namespace CarProject.Logic
                 return last;
             }
         }
+
+        public int CountSections
+        {
+            get
+            {
+                return _trackList.Count();
+            }
+        }
+
         public void LinkSections()
         {
             if (_trackList[0] != null)
             {
                 Section old = _trackList[0];
-                Section last = _trackList[_trackList.Count()-1];
+                Section last = _trackList[_trackList.Count() - 1];
                 foreach (Section a in _trackList)
                 {
                     if (a != _trackList[0])
@@ -54,7 +63,7 @@ namespace CarProject.Logic
                         a.AddBeforeMe(old);
                     }
                     old = a;
-                    if(a == last && _looped)
+                    if (a == last && _looped)
                     {
                         a.AddAfterMe(_trackList[0]);
                     }
