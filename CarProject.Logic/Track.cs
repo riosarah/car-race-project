@@ -64,6 +64,19 @@ namespace CarProject.Logic
             }
         }
 
+        public int MaxSpeed { get 
+            {
+                int maxSpeed = 0;
+                foreach(Section i in _trackList)
+                {
+                    if(i.MaxSpeed > maxSpeed)
+                    {
+                        maxSpeed = i.MaxSpeed;
+                    }
+                }
+                return maxSpeed;
+            } }
+
         public void LinkSections()
         {
             if (_trackList[0] != null)

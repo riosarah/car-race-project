@@ -41,6 +41,15 @@ namespace CarProject.UnitTests
             int length = track.Length;
             Assert.AreEqual(60, length);
         }
+        [TestMethod]
+        public void ItShouldReturnMaxSpeedOfAllSections_GivenATrack()
+        {
+            (int, int)[] sections = { (10, 10), (20, 20), (30, 30) };
+            Track track = new Track(sections);
+            int speed = track.MaxSpeed;
+            Assert.AreEqual(30, speed);
+
+        }
 
     }
 }
