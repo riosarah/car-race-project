@@ -79,8 +79,7 @@ namespace CarProject.Logic
             }
         }
 
-        public int Length { get 
-            {
+        public int GetTotalLength() { 
                 int sum = 0;
                 if (_trackList[0] != null)
                 {
@@ -89,8 +88,7 @@ namespace CarProject.Logic
                         sum += i.Length;
                     }
                 }
-                return sum;
-            }
+                return sum;            
         }
 
         public int MaxSpeed { get 

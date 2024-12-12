@@ -34,11 +34,11 @@ namespace CarProject.UnitTests
             Assert.AreEqual(3, length);
         }
         [TestMethod]
-        public void ItShouldReturnSumOfAllLengthsOfSections_GivenATrack()
+        public void ItShouldReturnTotalLength_GivenMultipleSections()
         {
             (int, int)[] sections = { (10, 10), (20, 20), (30, 30) };
             Track track = new Track(sections);
-            int length = track.Length;
+            int length = track.GetTotalLength();
             Assert.AreEqual(60, length);
         }
         [TestMethod]
